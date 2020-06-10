@@ -1,0 +1,23 @@
+{
+  "name": "remote-console",
+  "version": "1.0.0",
+  "description": "远程控制台",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uje/remote-console.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uje/remote-console/issues"
+  },
+  "homepage": "https://github.com/uje/remote-console#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}
