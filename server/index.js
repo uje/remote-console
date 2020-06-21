@@ -1,19 +1,33 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const http = require('http').createServer(app);
-const io = require('socket.io')(http);
 const config = require('./config');
 const path = require('path');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackConfig = require('../webpack.config');
+const webpack = require('webpack');
+const { getChannel } = require('./socket')(http);
+let compiler = webpack(webpackConfig);
+
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(config.CLIENT_SRC, 'views', 'index.html'));
 });
 
-io.on('connection', (socket) => {
-  console.log('a user connected');
-  socket.on('chat message', data => {
-    socket.broadcast.emit('chat message', data);
-  })
+app.get('/socket/channel/:channel', (req, res) => {
+  getChannel(req.params.channel).on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('message', data => {
+      socket.broadcast.emit('message', data);
+    });
+  });
+
+  res.send('ok');
 });
+
+app.use(webpackDevMiddleware(compiler, {
+  publicPath: webpackConfig.output.publicPath,
+}));
 
 http.listen(3000, () => {
   console.log('listening on *:3000');
