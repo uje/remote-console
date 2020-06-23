@@ -3,10 +3,12 @@ const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
-  entry: ['./client/src/index.js'],
+  entry: {
+    'remote-console': ['./client/src/page/client/index.js'],
+    'admin': ['./client/src/page/admin/index.js']
+  },
   output: {
     path: path.resolve(__dirname, 'client/assets'),
-    filename: 'remote-console.min.js',
     publicPath: '/assets/'
   },
   module: {
