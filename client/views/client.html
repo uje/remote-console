@@ -9,6 +9,20 @@
 
 <body>
   <script src="../assets/remote-console.js" id="remoteConsole" data-channel="test"></script>
+  <script>
+    document.addEventListener('click', () => {
+      console.log({
+        event: 'click',
+        data: 'none'
+      });
+    });
+
+    console.log({
+      event: 'onload',
+      data: 'test page'
+    });
+
+  </script>
 </body>
 
 </html>

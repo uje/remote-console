@@ -4,9 +4,17 @@ let innerSocket = null;
 
 function createSendMsg(type) {
   return function (...data) {
+    let error = null;
+    try {
+      throw new Error();
+    } catch (e) {
+      error = e;
+    }
+
     const messageItem = {
-      type,
+      type: `console.${type}`,
       timestamp: Date.now(),
+      stack: error.stack,
       data
     };
 
@@ -25,7 +33,8 @@ window.console = {
   log: createSendMsg('log'),
   info: createSendMsg('info'),
   debug: createSendMsg('debug'),
-  warn: createSendMsg('warn')
+  warn: createSendMsg('warn'),
+  error: createSendMsg('error')
 };
 
 export const updateSocket = socket => {
@@ -34,7 +43,7 @@ export const updateSocket = socket => {
   // 连接后发送消息
   socket.on('connect', () => {
     while (messageList.length > 0) {
-      socket.emit('message', messageItem.shift());
+      socket.emit('message', messageList.shift());
     }
   });
 }

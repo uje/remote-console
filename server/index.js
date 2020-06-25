@@ -7,11 +7,16 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackConfig = require('../webpack.config');
 const webpack = require('webpack');
 const io = require('socket.io')(http);
+const fs = require('fs');
 let compiler = webpack(webpackConfig);
 const ioPools = {};
 
+app.get('/channel/:channel', (req, res) => {
+  const template = fs.readFileSync(path.join(config.CLIENT_SRC, 'views', 'index.html')).toString();
+  res.send(template.replace(/var\schannel\s*=\s*'default'/, `var channel='${req.params.channel}'`));
+});
 
-app.get('/:filename?', (req, res) => {
+app.get('/:filename', (req, res) => {
   res.sendFile(path.join(config.CLIENT_SRC, 'views', req.params.filename ?? 'index.html'));
 });
 
