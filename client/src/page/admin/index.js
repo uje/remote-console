@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Main } from './main';
+import { Main } from './container/main';
 import io from 'socket.io-client/dist/socket.io.dev';
 import axios from 'axios';
 

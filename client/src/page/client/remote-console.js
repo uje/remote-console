@@ -2,7 +2,7 @@ const messageList = [];
 const oldConsole = window.console;
 let innerSocket = null;
 
-function createSendMsg(type) {
+function createSendMsg(type, opt) {
   return function (...data) {
     let error = null;
     try {
@@ -12,10 +12,11 @@ function createSendMsg(type) {
     }
 
     const messageItem = {
-      type: `console.${type}`,
+      type,
       timestamp: Date.now(),
       stack: error.stack,
-      data
+      data,
+      opt
     };
 
     if (innerSocket && innerSocket.connected) {
@@ -24,18 +25,12 @@ function createSendMsg(type) {
       messageList.push(messageItem);
     }
 
-    oldConsole[type](...data);
+    const typeExec = /console\.(\w+)/.exec(type);
+    if (typeExec && typeExec.length > 1) {
+      oldConsole[typeExec[1]](...data);
+    }
   }
 }
-
-// 重写调试方法
-window.console = {
-  log: createSendMsg('log'),
-  info: createSendMsg('info'),
-  debug: createSendMsg('debug'),
-  warn: createSendMsg('warn'),
-  error: createSendMsg('error')
-};
 
 export const updateSocket = socket => {
   innerSocket = socket;
@@ -47,3 +42,39 @@ export const updateSocket = socket => {
     }
   });
 }
+
+// 重写调试方法
+window.console = {
+  log: createSendMsg('console.log'),
+  info: createSendMsg('console.info'),
+  debug: createSendMsg('console.debug'),
+  warn: createSendMsg('console.warn'),
+  error: createSendMsg('console.error')
+};
+
+const onErrorReport = createSendMsg('window onerror');
+window.addEventListener('error', e => {
+  onErrorReport({
+    message: e.message,
+    lineno: e.lineno,
+  });
+});
+
+const unhandledrejectionReport = createSendMsg('unhandledrejection');
+window.addEventListener('unhandledrejection', e => {
+  console.log(e);
+  unhandledrejectionReport({
+    message: `${e.message}: ${e.reason}`
+  });
+});
+
+const cacheReporters = {};
+export const reportCustomMessage = window.reportCustomMessage = (type, msg, opt) => {
+  let reporter = cacheReporters[type];
+
+  if (!reporter) {
+    reporter = cacheReporters[type] = createSendMsg(type, opt);
+  }
+
+  reporter(msg);
+};
