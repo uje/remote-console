@@ -96,7 +96,7 @@ export function Main(props) {
           <textarea
             className="guideCode"
             readOnly
-            defaultValue={`<script src="${location.origin}/assets/remote-console.js" data-channel="${channel}"></script>`}
+            defaultValue={`<script id="remoteConsole" src="${location.origin}/assets/remote-console.js" data-channel="${channel}"></script>`}
           />
         </Modal>
       ) : null}
