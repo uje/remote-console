@@ -3,6 +3,7 @@ import { useImmer } from "use-immer";
 import { SYSTEM_ERROR, COLOR_MESSAGE } from "../../config";
 import { Filter } from "../../component/filter";
 import { MessageList } from "../../component/messageList";
+import { Modal } from "../../component/modal";
 import "./index.scss";
 
 function getFilterData(data) {
@@ -21,6 +22,7 @@ function getFilterData(data) {
 }
 
 export function Main(props) {
+  const [showGuide, updateShowGuide] = useState(false);
   const [logList, updateLogList] = useImmer([]);
   const [selectedType, updateSelectedType] = useState(SYSTEM_ERROR[0]);
   const filters = getFilterData(logList);
@@ -67,8 +69,14 @@ export function Main(props) {
   return (
     <div className="main">
       <div className="actions">
-        <button className="clearBtn" onClick={clearLogList}>
+        <button className="btn clearBtn" onClick={clearLogList}>
           清屏
+        </button>
+        <button
+          className="btn howtouseBtn"
+          onClick={() => updateShowGuide(true)}
+        >
+          如何使用
         </button>
         <Filter
           data={filters}
@@ -77,6 +85,21 @@ export function Main(props) {
         />
       </div>
       <MessageList data={filteredLogList} timeFormat="MM月DD日 hh:mm:ss" />
+      {showGuide ? (
+        <Modal
+          title="在你的网页中使用远程控制台"
+          onClose={() => updateShowGuide(false)}
+        >
+          <span className="guideTitle">
+            复制以下代码放入你的html页面的head标签内：
+          </span>
+          <textarea
+            className="guideCode"
+            readOnly
+            defaultValue={`<script src="${location.origin}/assets/remote-console.js" data-channel="${channel}"></script>`}
+          />
+        </Modal>
+      ) : null}
     </div>
   );
 }

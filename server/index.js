@@ -8,8 +8,11 @@ const webpackConfig = require('../webpack.config');
 const webpack = require('webpack');
 const io = require('socket.io')(http);
 const fs = require('fs');
+const cors = require('cors');
 let compiler = webpack(webpackConfig);
 const ioPools = {};
+
+app.use(cors());
 
 app.get('/channel/:channel', (req, res) => {
   const template = fs.readFileSync(path.join(config.CLIENT_SRC, 'views', 'index.html')).toString();
