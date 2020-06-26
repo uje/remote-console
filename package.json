@@ -52,7 +52,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-json-view": "^1.19.1",
-    "react-modal": "^3.11.2",
     "react-tooltip": "^4.2.7",
     "sass": "^1.26.9",
     "sass-loader": "^8.0.2",
