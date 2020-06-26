@@ -1,0 +1,20 @@
+.filters {
+  display: inline-block;
+  
+  .filterBtn {
+    line-height: 30px;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-right: 10px;
+    color: #fff;
+    border-radius: 5px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    &.filterBtnSelected {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+}

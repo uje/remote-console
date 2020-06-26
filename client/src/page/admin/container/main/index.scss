@@ -1,0 +1,30 @@
+body {
+  background-color: #171F22;
+  color: #fff;
+}
+
+button { 
+  outline: none;
+}
+
+.main {
+  padding: 10px;
+
+  .actions {
+    position: fixed;
+
+    .clearBtn {
+      line-height: 30px;
+      border: 1px solid rgba(255, 255, 255, .3);
+      border-radius: 5px;
+      background: none;
+      color: #fff;
+      margin-right: 60px;
+      width: 80px;
+      text-align: center;
+      &:hover {
+        background: rgba(255, 255, 255, .3);
+      }
+    }
+  }
+}

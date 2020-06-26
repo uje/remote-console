@@ -1,0 +1,21 @@
+.messageList {
+  margin-top: 50px;
+  .messageItem {
+    position: relative;
+    line-height: 30px;
+
+    .messageData {
+      vertical-align: top;
+    }
+
+    .messageTime,
+    .messageType {
+      margin-right: 5px;
+      vertical-align: top;
+    }
+
+    .react-json-view {
+      line-height: 1;
+    }
+  }
+}
