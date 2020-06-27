@@ -6,7 +6,7 @@
 ```html
   <script src="http://IP:6688/assets/remote-console.js" id="remoteConsole" data-channel="CHANNEL"></script>
 ```
-2. 在PC端浏览器打开：http://IP/channel/CHANNEL
+2. 在PC端浏览器打开：http://IP:6688/channel/CHANNEL
 3. CHANNEL可换成你想使用的任意值
 
 ## 说明
