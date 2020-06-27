@@ -1,5 +1,5 @@
 {
-  "name": "@uje/remote-console",
+  "name": "@jianming/remote-console",
   "version": "1.0.0",
   "description": "远程控制台",
   "main": "index.js",
