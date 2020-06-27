@@ -22,7 +22,7 @@ function getFilterData(data) {
 }
 
 export function Main(props) {
-  const [showGuide, updateShowGuide] = useState(false);
+  const [showGuide, updateShowGuide] = useState(localStorage[channel] !== '1');
   const [logList, updateLogList] = useImmer([]);
   const [selectedType, updateSelectedType] = useState(SYSTEM_ERROR[0]);
   const filters = getFilterData(logList);
@@ -49,6 +49,7 @@ export function Main(props) {
   };
 
   useEffect(() => {
+    localStorage[channel] = 1;
     props.socket.on("message", onmessage);
     return () => {
       props.socket.off("message", onmessage);

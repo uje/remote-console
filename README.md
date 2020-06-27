@@ -1,6 +1,18 @@
 # remote-console
 使用socket.io实现的远程控制台，可在pc端抓取手机页面的控制台输出
 
+## 安装
+1. 通过npm包安装
+``` html
+npm i @jianming/remote-console -g
+cre start
+```
+
+2. 通过git clone源代码，然后
+```html
+npm start
+```
+
 ## 使用方法
 1. 在需要抓取的页面引入：
 ```html

@@ -1,19 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>远程控制台</title>
+    <style>
+      body {
+        background-color: #171f22;
+        color: #fff;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>日志查看器</title>
-</head>
+      .app {
+        width: 600px;
+        margin: 120px auto 0;
+        text-align: center;
+      }
+      .title {
+        margin-bottom: 60px;
+      }
+      .channelName {
+        line-height: 30px;
+        border: 1px solid #eee;
+        padding: 0 5px;
+        outline: none;
+        width: 400px;
+        border-radius: 3px;
+      }
 
-<body>
-  <div id="app"></div>
-  <script>
-    var channel = 'default';
-  </script>
-  <script src="../assets/vendor.js"></script>
-  <script src="../assets/admin.js"></script>
-</body>
+      .confirm {
+        line-height: 28px;
+        border: 1px solid #eee;
+        background: none;
+        border-radius: 3px;
+        outline: none;
+        color: #fff;
+        width: 80px;
+      }
+    </style>
+  </head>
 
+  <body>
+    <div class="app">
+      <h1 class="title">创建你的调试频道</h1>
+      <input type="text" class="channelName" autofocus placeholder="请输入1-18位的英文字母" maxlength="36">
+      <button type="button" class="confirm">进入</button>
+    </div>
+
+    <script> 
+      document.querySelector('.confirm').onclick = function(){ 
+        const channel = document.querySelector('.channelName').value.trim();
+
+        if (channel === '') {
+          return void alert('请输入名称!');
+        }
+
+        location.href = '/channel/' + channel;
+      }
+    </script>
+  </body>
 </html>

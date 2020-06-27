@@ -15,11 +15,11 @@ const ioPools = {};
 app.use(cors());
 
 app.get('/channel/:channel', (req, res) => {
-  const template = fs.readFileSync(path.join(config.CLIENT_SRC, 'views', 'index.html')).toString();
+  const template = fs.readFileSync(path.join(config.CLIENT_SRC, 'views', 'channel.html')).toString();
   res.send(template.replace(/var\schannel\s*=\s*'default'/, `var channel='${req.params.channel}'`));
 });
 
-app.get('/:filename', (req, res) => {
+app.get('/:filename?', (req, res) => {
   res.sendFile(path.join(config.CLIENT_SRC, 'views', req.params.filename ?? 'index.html'));
 });
 
