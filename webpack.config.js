@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 module.exports = {
-  mode: 'development',
+  mode: process.env.NODE_ENV || 'development',
   entry: {
     'remote-console': ['./client/src/page/client/index.js'],
     'admin': ['./client/src/page/admin/index.js'],

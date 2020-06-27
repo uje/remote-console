@@ -1,6 +1,6 @@
 {
   "name": "@jianming/remote-console",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "远程控制台",
   "main": "index.js",
   "preferGlobal": true,
@@ -15,7 +15,12 @@
     "url": "git+https://github.com/uje/remote-console.git"
   },
   "author": "yuanhe",
-  "keywords": ["remote-console", "weinre", "console", "debug"],
+  "keywords": [
+    "remote-console",
+    "weinre",
+    "console",
+    "debug"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/uje/remote-console/issues"

@@ -38,11 +38,14 @@ app.get('/socket/channel/:channel', (req, res) => {
 
   res.send('ok');
 });
-
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: webpackConfig.output.publicPath,
-}));
+if (process.env.NODE_ENV === 'development') {
+  app.use(webpackDevMiddleware(compiler, {
+    publicPath: webpackConfig.output.publicPath,
+  }));
+} else {
+  app.use('/assets', express.static(path.join(config.CLIENT_SRC, 'assets')));
+}
 
 http.listen(6688, () => {
-  console.log('listening on *:3000');
+  console.log('listening on *:6688');
 });
