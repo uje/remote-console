@@ -1,8 +1,12 @@
 {
-  "name": "remote-console",
+  "name": "@uje/remote-console",
   "version": "1.0.0",
   "description": "远程控制台",
   "main": "index.js",
+  "preferGlobal": true,
+  "bin": {
+    "cre": "./bin/index.js"
+  },
   "scripts": {
     "start": "NODE_ENV=development nodemon ./server/index"
   },
@@ -10,7 +14,8 @@
     "type": "git",
     "url": "git+https://github.com/uje/remote-console.git"
   },
-  "author": "",
+  "author": "yuanhe",
+  "keywords": ["remote-console", "weinre", "console", "debug"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/uje/remote-console/issues"

@@ -43,6 +43,6 @@ app.use(webpackDevMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
 }));
 
-http.listen(3000, () => {
+http.listen(6688, () => {
   console.log('listening on *:3000');
 });
