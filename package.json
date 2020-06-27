@@ -1,6 +1,6 @@
 {
   "name": "@jianming/remote-console",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "远程控制台",
   "main": "index.js",
   "preferGlobal": true,

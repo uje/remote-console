@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 const argv = process.argv;
 const command = argv[2];
 const path = require('path');
