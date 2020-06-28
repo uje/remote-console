@@ -14,7 +14,8 @@ function createSendMsg(type, opt) {
     const messageItem = {
       type,
       timestamp: Date.now(),
-      stack: error.stack,
+      stack: error.stack?.replace(/Error/, '').replace(/^\n+/, ''),
+      ua: navigator.userAgent,
       data,
       opt
     };
@@ -62,7 +63,6 @@ window.addEventListener('error', e => {
 
 const unhandledrejectionReport = createSendMsg('unhandledrejection');
 window.addEventListener('unhandledrejection', e => {
-  console.log(e);
   unhandledrejectionReport({
     message: `${e.message}: ${e.reason}`
   });

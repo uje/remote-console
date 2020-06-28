@@ -47,6 +47,11 @@
     </div>
 
     <script> 
+      document.onkeyup = function(e){
+        if(e.keyCode === 13) {
+          document.querySelector('.confirm').dispatchEvent(new Event('click'));
+        } 
+      }
       document.querySelector('.confirm').onclick = function(){ 
         const channel = document.querySelector('.channelName').value.trim();
 

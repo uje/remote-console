@@ -63,7 +63,7 @@ export function Main(props) {
 
   filteredLogList = filteredLogList.map((t) => ({
     ...t,
-    type: SYSTEM_ERROR.includes(t.type) ? t.type.toUpperCase() : t.type,
+    shortType: SYSTEM_ERROR.includes(t.type) ? t.type.replace(/^[^\s.]+(\s|\.)/,'').toUpperCase() : t.type,
     style: t.type in COLOR_MESSAGE ? { color: COLOR_MESSAGE[t.type] } : t.opt,
   }));
 
@@ -85,7 +85,7 @@ export function Main(props) {
           selectedType={selectedType}
         />
       </div>
-      <MessageList data={filteredLogList} timeFormat="MM月DD日 hh:mm:ss" />
+      <MessageList data={filteredLogList}/>
       {showGuide ? (
         <Modal
           title="在你的网页中使用远程控制台"

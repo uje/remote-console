@@ -20,7 +20,7 @@ app.get('/channel/:channel', (req, res) => {
 });
 
 app.get('/:filename?', (req, res) => {
-  res.sendFile(path.join(config.CLIENT_SRC, 'views', req.params.filename ?? 'index.html'));
+  res.sendFile(path.join(config.CLIENT_SRC, 'views', req.params.filename || 'index.html'));
 });
 
 app.get('/socket/channel/:channel', (req, res) => {

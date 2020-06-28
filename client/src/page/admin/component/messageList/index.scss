@@ -9,8 +9,10 @@
     }
 
     .messageTime,
-    .messageType {
-      margin-right: 5px;
+    .messageType,
+    .messageOS,
+    .messageBrowser {
+      margin-right: 10px;
       vertical-align: top;
     }
 

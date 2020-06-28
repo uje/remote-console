@@ -14,6 +14,13 @@ npm start
 ```
 
 ## 使用方法
+### 方法1
+```html 
+npm install @jianming/remote-console -g
+cre start
+```
+
+### 方法2
 1. 在需要抓取的页面引入：
 ```html
   <script src="http://IP:6688/assets/remote-console.js" id="remoteConsole" data-channel="CHANNEL"></script>
