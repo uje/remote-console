@@ -5,10 +5,14 @@ import ReactTooltip from "react-tooltip";
 import parser from "ua-parser-js";
 import "./index.scss";
 
-function renderMessage(data) {
-  return Array.isArray(data) ? (
-    data.map((item) => renderMessage(item))
-  ) : typeof data === "object" ? (
+const toString = Object.prototype.toString;
+
+function renderMessage(data, isChild) {
+  const dataType = toString.call(data).slice(8, -1).toLowerCase();
+
+  return Array.isArray(data) && !isChild ? (
+    data.map((item) => renderMessage(item, true))
+  ) : dataType === "object" ? (
     <ReactJson
       src={data}
       theme="monokai"
@@ -18,7 +22,7 @@ function renderMessage(data) {
       key={data}
     />
   ) : (
-    data
+    JSON.stringify(data)
   );
 }
 
@@ -50,7 +54,7 @@ export function MessageList(props) {
             <span className="messageType" data-tip={item.type}>
               [{item.shortType}]
             </span>
-            {device.type === 'mobile' ? (
+            {device.type === "mobile" ? (
               <span
                 className="messageOS"
                 data-tip={`
@@ -85,13 +89,7 @@ export function MessageList(props) {
                 {browser.name} {browser.major}
               </span>
             ) : null}
-            <span
-              className="messageData"
-              data-tip={item.stack.replace(/\n/g, "<br/>")}
-              data-html={true}
-            >
-              {renderMessage(item.data)}
-            </span>
+            <span className="messageData">{renderMessage(item.data)}</span>
           </div>
         );
       })}

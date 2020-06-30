@@ -16,7 +16,7 @@ function createSendMsg(type, opt) {
       timestamp: Date.now(),
       stack: error.stack?.replace(/Error/, '').replace(/^\n+/, ''),
       ua: navigator.userAgent,
-      data,
+      data: data.map(item => typeof item === 'function' ? item.toString() : item),
       opt
     };
 
